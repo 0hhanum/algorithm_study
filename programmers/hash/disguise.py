@@ -22,6 +22,7 @@ clothes 의 모든 원소는 문자열로 이루어져 있습니다.
 from itertools import combinations
 
 
+# 1트
 def solution(clothes):
     table = {}
     for name, kind in clothes:
@@ -48,6 +49,49 @@ def finder(table, selected):
     for kind in selected:
         answer *= len(table[kind])
     return answer
+
+
+# 2트
+def solution(clothes):
+    table = {}
+    for name, kind in clothes:
+        try:
+            table[kind].append(name)
+        except KeyError:
+            table[kind] = [name]
+
+    for kind in table:
+        table[kind] = len(table[kind])
+    simplified_list = list(table.values())
+    answer = 0
+    for i in range(1, len(simplified_list) + 1):
+        for selected in list(combinations(simplified_list, i)):
+            answer += multiply(selected)
+
+    return answer
+
+
+def multiply(li):
+    result = 1
+    for i in li:
+        result *= i
+    return result
+
+
+# 3트
+
+def solution(clothes):
+    table = {}
+    for name, kind in clothes:
+        try:
+            table[kind].append(name)
+        except KeyError:
+            table[kind] = [name]
+
+    for kind in table:
+        table[kind] = len(table[kind]) + 1
+    simplified_list = list(table.values())
+    return multiply(simplified_list) - 1
 
 
 a = [["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"], ["pur", "glasses"]]
