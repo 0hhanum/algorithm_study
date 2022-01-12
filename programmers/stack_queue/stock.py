@@ -9,10 +9,15 @@ def solution(prices):
             stack.append([item, 0])
             continue
         elif stack[-1][0] > item:  # 스택 top > item 라면 -> 빼내야함
+            tmp = []
             while stack and stack[-1][0] > item:
                 _, frequency = stack.pop()
-                answer[i - 1] = frequency
-                i -= 1
+                tmp.append(frequency)
+            for j in range(0, i):
+                if answer[i - j - 1] == 999:
+                    answer[i - j - 1] = tmp.pop(0)
+                if not tmp:
+                    break
         stack.append([item, 0])
 
     def converter(x):
@@ -27,4 +32,4 @@ def solution(prices):
 
 # print(solution([1, 2, 3, 2, 3]))
 # print(solution([3, 1, 3, 4, 1, 2]))
-print(solution([5, 4, 3]))
+print(solution([1, 2, 3, 2, 3, 1]))
