@@ -32,4 +32,4 @@ def solution(prices):
 
 # print(solution([1, 2, 3, 2, 3]))
 # print(solution([3, 1, 3, 4, 1, 2]))
-print(solution([1, 2, 3, 2, 3, 1]))
+print(solution([1, 2, 3, 2, 1, 5, 1, 1, 1, 1, 1, 3, 3, 3, 3, 31, 3, 1, 3, 1, 3, 1, 31]))
