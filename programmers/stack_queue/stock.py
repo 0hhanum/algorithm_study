@@ -1,5 +1,5 @@
 def solution(prices):
-    answer = [999 for i in prices]
+    answer = ["a" for i in prices]
     stack = []
     for i in range(len(prices)):
         item = prices[i]
@@ -14,14 +14,14 @@ def solution(prices):
                 _, frequency = stack.pop()
                 tmp.append(frequency)
             for j in range(0, i):
-                if answer[i - j - 1] == 999:
+                if answer[i - j - 1] == "a":
                     answer[i - j - 1] = tmp.pop(0)
                 if not tmp:
                     break
         stack.append([item, 0])
 
     def converter(x):
-        if x == 999:
+        if x == "a":
             return stack.pop(0)[1]
         else:
             return x
