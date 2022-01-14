@@ -42,7 +42,6 @@ a = ["12", "23", "2241", "120", "3", "330", "30"]
 
 # print(solution(a))
 # FAIL
-import functools
 
 a = [1, 2, 3, 4]
 a = list(map(str, a))
@@ -55,4 +54,29 @@ def hello(x, y):
         return -1
 
 
-print(sorted(a, key=functools.cmp_to_key(hello), reverse=True))
+# print(sorted(a, key=functools.cmp_to_key(hello), reverse=True))
+
+
+def solution(nums):
+    new_list = list(enumerate(map(str, nums)))
+
+    def sorter(x):
+        y = x[1]
+        if len(y) == 1:
+            return (y + y + y, x[0])
+        elif len(y) == 2:
+            return (y + y[0], x[0])
+        else:
+            return (y, x[0])
+
+    new_list = list(map(sorter, new_list))
+    new_list.sort(key=lambda x: x[1])
+
+    result = ""
+
+    for i in new_list[::-1]:
+        result += str(nums[i[1]])
+    return result
+
+
+solution([3, 30, 34, 5, 9])
