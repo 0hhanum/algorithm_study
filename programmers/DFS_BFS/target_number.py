@@ -1,4 +1,5 @@
 from itertools import combinations as cb
+from itertools import product
 
 
 def solution(numbers, target):
@@ -14,3 +15,11 @@ def solution(numbers, target):
                 answer += 1
 
     return answer
+
+
+a = [2, 4, 6]
+l = [(x, -x) for x in a]
+print(l)
+print(list(product(l)))
+print(list(product(*l)))
+print(list(product((1, 2, 3), (4, 5), (7,))))
