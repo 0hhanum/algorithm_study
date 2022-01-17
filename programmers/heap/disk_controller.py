@@ -2,39 +2,32 @@ import heapq
 
 
 def solution(jobs):
+    waiting = []  # 대기 Heap => [소요시간, 대기시간] 형태로 들어감
+    num_of_jobs = len(jobs)
     answer = 0
-    is_working = False
-    waiting = []
-    time = 0
-    work_flow = 0
-    length = len(jobs)
+    time = 0  # 현재 시점
+    heapq.heapify(jobs)  # 정렬
 
-    while jobs or is_working:
-        if work_flow == 0:
-            is_working = False
-        if not is_working and not waiting and jobs:
-            job = jobs.pop(0)
-            work_flow = job[1]
-            is_working = True
-            answer += work_flow
-        elif not is_working and waiting:
-            is_working = True
-            work = heapq.heappop(waiting)
-            print(work, "aaa")
-            work_flow = work[0]
-            answer += work_flow + work[1]
-        elif is_working and jobs:
-            if jobs[0][0] >= time:
-                work = jobs.pop(0)[1]
-                heapq.heappush(waiting, [work, 0])
-        if waiting:
-            for i, _ in enumerate(waiting):
-                waiting[i][1] += 1
-        time += 1
-        work_flow -= 1
-        print(waiting)
-        print(work_flow)
-    return int(answer / length)
+    while jobs or waiting:  # jobs, waiting 둘 다 비면 종료.
+        job = 0
+        if not waiting:  # Heap 비어있으면 바로 jobs 에서 꺼내서 실행.
+            starting_point, job = heapq.heappop(jobs)
+            answer += job
+            time = starting_point + job  # 시점이동
+
+        else:
+            job, time_for_wait = heapq.heappop(waiting)  # 힙에서 최소값 꺼내기
+            answer += job + time_for_wait  # 대기시간 + 소요시간
+            time += job  # 시점 업데이트
+
+        for idx, _ in enumerate(waiting):  # 대기 힙에 있는 작업들 대기시간 업데이트
+            waiting[idx][1] += job
+
+        # 대기 들어가야 할 것들 처리
+        while jobs and jobs[0][0] < time:
+            starting_point, job = heapq.heappop(jobs)
+            heapq.heappush(waiting, [job, time - starting_point])  # 소요시간, 대기시간
+    return int(answer / num_of_jobs)
 
 
 print(solution([[0, 3], [1, 9], [2, 6]]))
