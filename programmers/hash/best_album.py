@@ -51,6 +51,7 @@ def solution(genres, plays):
 
     # total 값 순으로 정렬
     new_table = sorted(table.items(), key=lambda x: x[1][0], reverse=True)
+
     answer = []
 
     for item in new_table:
