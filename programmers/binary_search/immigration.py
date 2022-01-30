@@ -17,6 +17,26 @@ def binary_search(array, x):
     return -1
 
 
-a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-for i in range(14):
-    print(i, " : ", binary_search(a, i))
+def solution(n, times):
+    times.sort()
+    start = 0
+    end = n * times[0]
+    answer = 0
+
+    def check(time):
+        result = 0
+        for i in times:
+            result += time // i
+        return result
+
+    while start <= end:
+        current = (start + end) // 2
+        people = check(current)
+        if people < n:
+            start = current + 1
+        else:
+            end = current - 1
+    return start
+
+
+print(solution(6, [7, 10]))
