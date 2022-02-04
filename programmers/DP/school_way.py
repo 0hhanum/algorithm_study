@@ -10,6 +10,13 @@ def solution(m, n, puddles):
         if y == 0:
             for i in range(x, m):
                 grid[y][i] = -1
+    for i in range(m):
+        for j in range(n):
+            try:
+                if grid[j][i] == -1 and grid[j - 1][i + 1] == -1:
+                    grid[j][i + 1] = -1
+            except:
+                pass
 
     def go_to_school(x, y, value, direction):
         if grid[y][x] == -1:
@@ -22,11 +29,7 @@ def solution(m, n, puddles):
         elif direction == 0 and grid[y][x - 1] == -1:
             grid[y][x] = value
         elif direction == 1 and grid[y - 1][x] == 0:
-            for i in range(y):
-                if grid[i][x - 1] != -1:
-                    return
-            else:
-                grid[y][x] = value
+            return
         elif direction == 0 and grid[y][x - 1] == 0:
             return
         else:
@@ -39,9 +42,5 @@ def solution(m, n, puddles):
             go_to_school(x, y + 1, value, 0)
 
     go_to_school(0, 0, 1, 1)
-    print(grid)
-    return grid[-1][-1] % 1000000007
 
-
-solution(4, 3, [[3, 1], [3, 2]])
-solution(4, 3, [[2, 2], [3, 2]])
+    return grid[-1][-1] % 1000000007 if grid[-1][-1] != -1 else 0
