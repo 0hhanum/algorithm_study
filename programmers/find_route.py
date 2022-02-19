@@ -40,4 +40,10 @@ def solution(nodeinfo):
     return [post, pre]
 
 
-print(solution([[5, 3], [11, 5], [13, 3], [3, 5], [6, 1], [1, 3], [8, 6], [7, 2], [2, 2]]))
+# print(solution([[5, 3], [11, 5], [13, 3], [3, 5], [6, 1], [1, 3], [8, 6], [7, 2], [2, 2]]))
+
+a = [[5, 3], [11, 5], [13, 3], [3, 5], [6, 1], [1, 3], [8, 6], [7, 2], [2, 2]]
+b = list(zip(range(1, len(a) + 1), a))
+print(list(b))
+b = sorted(b, key=lambda x: (-x[1][1], x[1][0]))
+print(b)
