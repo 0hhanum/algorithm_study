@@ -17,3 +17,9 @@ def solution(orders, course):
                 answer.extend(list(filter(lambda x: tmp[x] == maximum, tmp)))
     answer.sort()
     return answer
+
+
+from collections import Counter
+
+a = [1, 2, 3, 4, 1, 1, 1, 2, 3, 4, 6]
+print(Counter(a).most_common())
