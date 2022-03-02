@@ -62,9 +62,9 @@ def recursion(start, end):
 
 
 tree = []
-# inputs = sys.stdin.readlines()  # 입력 값 개수 안알려줄 때 hack
-# for i in inputs:
-#     tree.append(int(i))
-for i in range(9):
-    tree.append(int(sys.stdin.readline()))
-recursion(0, 9)
+inputs = sys.stdin.readlines()  # 입력 값 개수 안알려줄 때 hack
+for i in inputs:
+    tree.append(int(i))
+# for i in range(9):
+#     tree.append(int(sys.stdin.readline()))
+recursion(0, len(tree))
