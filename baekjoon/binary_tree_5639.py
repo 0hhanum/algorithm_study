@@ -61,6 +61,19 @@ def recursion(start, end):
     print(tree[start])  # 후위순회
 
 
+def rec(start, end):
+    if start > end:
+        return
+    point = end + 1
+    for i in range(start + 1, end + 1):
+        if tree[i] > tree[start]:
+            point = i
+            break
+    rec(start + 1, point - 1)
+    rec(point, end)
+    print(tree[start])
+
+
 tree = []
 inputs = sys.stdin.readlines()  # 입력 값 개수 안알려줄 때 hack
 for i in inputs:
