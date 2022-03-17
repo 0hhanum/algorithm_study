@@ -11,7 +11,7 @@ for _ in range(N):
     heap = [[0, c]]
     table = defaultdict(list)
     maximum = 0
-    counter = 1
+    counter = 0
     for _ in range(d):
         a, b, s = map(int, sys.stdin.readline().strip().split())
         table[b].append([s, a])
@@ -24,8 +24,6 @@ for _ in range(N):
             for target_time, target in table[current]:
                 total_time = current_time + target_time
                 if total_time < times[target]:
-                    if times[target] == float('inf'):
-                        counter += 1
                     times[target] = total_time
                     heapq.heappush(heap, [total_time, target])
     for time in times:
@@ -33,3 +31,5 @@ for _ in range(N):
             continue
         if time > maximum:
             maximum = time
+        counter += 1
+    print(counter, maximum)
