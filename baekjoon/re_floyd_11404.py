@@ -20,6 +20,9 @@ for k in range(N):
 
 for row in graph:
     for num in row:
-        print(num, end=" ")
+        if num == float('inf'):
+            print(0, end=" ")
+        else:
+            print(num, end=" ")
     print()
 
