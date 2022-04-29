@@ -1,3 +1,4 @@
+import heapq
 import sys
 
 # MST 문제 => 크루스칼 사용
@@ -6,8 +7,8 @@ M = int(sys.stdin.readline())
 
 edges = []
 for _ in range(M):
-    edges.append(list(map(int, sys.stdin.readline().split())))
-edges = sorted(edges, key=lambda x: x[2])  # 간선 weight 오름차순 정렬
+    a, b, w = list(map(int, sys.stdin.readline().split()))
+    heapq.heappush(edges, [w, a, b])
 
 # UNION FIND
 root = [i for i in range(N + 1)]
@@ -32,11 +33,11 @@ def union(x, y):
 count = 0
 answer = 0
 while count < N - 1:
-    i, j, w = edges.pop(0)
-    i = find(i)
-    j = find(j)
-    if i != j:
+    w, a, b = heapq.heappop(edges)
+    a = find(a)
+    b = find(b)
+    if a != b:
         answer += w
         count += 1
-        union(i, j)
+        union(a, b)
 print(answer)
